@@ -46,7 +46,7 @@ class MainPage(BasePage):
 
     @allure.step('Нажимаем на крестик, закрывающий модальное окно')
     def click_close_modal(self):
-        self.click_element_located(MainPageLocators.CLOSE_MODAL)
+        self.wait_for_element_loaded(MainPageLocators.CLOSE_MODAL).click()
 
     @allure.step('Получаем значение счетчика ингредиента')
     def get_first_ingredient_counter_value(self):
@@ -65,12 +65,12 @@ class MainPage(BasePage):
         self.wait_until_element_not_present(MainPageLocators.TEMPORARY_ORDER_MODAL_HEADER)
         return self.driver.find_element(By.XPATH, MainPageLocators.ORDER_ID_XPATH).text
 
-    @allure.step('Получаем значение ID заказа при его оформлении')
-    def make_order_and_check_modal_open(self):
-        self.check_make_order_button()
+    @allure.step('Создаем заказ')
+    def make_order(self):
         self.drag_n_drop_first_ingredient_to_basket()
         self.click_make_order()
-        self.check_modal_opened()
+
+
 
 
 

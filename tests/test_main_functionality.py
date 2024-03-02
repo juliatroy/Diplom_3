@@ -10,8 +10,8 @@ class TestMainFunctionality:
     def test_redirect_to_constructor(self, driver):
         entrance_page = EntrancePage(driver)
         entrance_page.open_page(URLS.ENTRANCE_PAGE_SUBDIRECTORY)
+        entrance_page.wait_for_entrance_page_header_loaded()
         entrance_page.click_constructor()
-        entrance_page.check_page()
         main_page = MainPage(driver)
         main_page.wait_for_main_page_header_loaded()
 

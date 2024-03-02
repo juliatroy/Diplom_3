@@ -9,16 +9,28 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 fake = Faker()
 
-@allure.step('Открываем браузер')
-@pytest.fixture(params=['chrome', 'firefox'])
-def driver(request):
-    if request.param == 'chrome':
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service)
-    elif request.param == 'firefox':
-        service = Service(GeckoDriverManager().install())
-        driver = webdriver.Firefox(service=service)
+# @allure.step('Открываем браузер')
+# @pytest.fixture(params=['chrome', 'firefox'])
+# def driver(request):
+#     if request.param == 'chrome':
+#         service = Service(ChromeDriverManager().install())
+#         driver = webdriver.Chrome(service=service)
+#     elif request.param == 'firefox':
+#         service = Service(GeckoDriverManager().install())
+#         driver = webdriver.Firefox(service=service)
+#
+#     yield driver
+#     driver.quit()
 
+@allure.step('Открываем браузер')
+@pytest.fixture()
+def driver():
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service)
+#     elif request.param == 'firefox':
+#         service = Service(GeckoDriverManager().install())
+#         driver = webdriver.Firefox(service=service)
+#
     yield driver
     driver.quit()
 
